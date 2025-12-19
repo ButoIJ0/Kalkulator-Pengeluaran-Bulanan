@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Proses</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="navbar">
+  <h1>Penghitung Pengeluaran</h1>
+  <div>
+    <a href="/home">Home</a>
+    <a href="/proses">Proses</a>
+    <a href="/history">History</a>
+  </div>
+</div>
+
+<div class="container">
+  <h2>Input Keuangan</h2>
+
+  <form action="/set-budget" method="POST">
+    <input type="number" name="amount" placeholder="Masukkan uang bulanan" required>
+    <button type="submit">Set Uang Bulanan</button>
+  </form>
+
+  <hr>
+
+  <form action="/add-expense" method="POST">
+    <input name="name" placeholder="Nama Pengeluaran" required>
+    <input type="number" name="amount" placeholder="Nominal (Rp)" required>
+
+    <select name="category" required>
+      <option value="">Pilih Kategori</option>
+      <option>Makan</option>
+      <option>Transport</option>
+      <option>Akademik</option>
+      <option>Hiburan</option>
+    </select>
+
+    <button type="submit">Tambah Pengeluaran</button>
+  </form>
+
+  <a href="/result" class="btn secondary">Lihat Hasil</a>
+</div>
+
+</body>
+</html>

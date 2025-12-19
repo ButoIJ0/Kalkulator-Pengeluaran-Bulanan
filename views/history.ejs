@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>History</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="navbar">
+  <h1>Penghitung Pengeluaran</h1>
+  <div>
+    <a href="/home">Home</a>
+    <a href="/proses">Proses</a>
+    <a href="/history">History</a>
+  </div>
+</div>
+
+<div class="container">
+  <h2>Riwayat Pengeluaran</h2>
+
+  <% if (expenses.length === 0) { %>
+    <p>Belum ada pengeluaran</p>
+  <% } else { %>
+    <ul>
+      <% expenses.forEach(e => { %>
+        <li>
+          <b><%= e.name %></b><br>
+          Rp <%= e.amount %> - <%= e.category %>
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
+
+  <a href="/proses" class="btn secondary">Kembali</a>
+</div>
+
+</body>
+</html>

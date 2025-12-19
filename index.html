@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Penghitung Pengeluaran Mahasiswa</title>
+
+<style>
+body{
+  font-family: Arial, sans-serif;
+  background:#f2f2f2;
+  margin:0;
+  padding:20px;
+}
+
+.container{
+  max-width:420px;
+  margin:auto;
+  background:#fff;
+  padding:20px;
+}
+
+.header{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.header h1{
+  color:#6b563a;
+}
+
+hr{
+  border:1px solid #d6b88c;
+  margin:20px 0;
+}
+
+.box{
+  background:#eadbc6;
+  padding:15px;
+  margin-bottom:20px;
+}
+
+.box h3{
+  margin:0;
+}
+
+input, select{
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  box-sizing:border-box;
+}
+
+button{
+  width:100%;
+  padding:10px;
+  background:#d2b48c;
+  border:none;
+  color:white;
+  margin-top:10px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#bfa070;
+}
+
+.list{
+  border:1px dashed #ccc;
+  padding:15px;
+  text-align:center;
+  color:#aaa;
+  margin-top:10px;
+}
+
+.summary{
+  background:#faf5eb;
+  padding:15px;
+  margin-top:20px;
+}
+
+.summary div{
+  display:flex;
+  justify-content:space-between;
+  margin:8px 0;
+}
+
+.reset{
+  background:#e3a7a0;
+  margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>💰 Penghitung Pengeluaran Mahasiswa</h1>
+    <p>
+      Mischelle Kaylafi Khumaira (2510312015)<br>
+      Khairani Nadira (2510312064)<br>
+      Tsaqila Haura Shifa (2510312072)<br><br>
+      Teknik Industri<br>
+      Universitas Pembangunan Nasional "Veteran" Jakarta<br>
+      2025
+    </p>
+  </div>
+
+  <hr>
+
+  <!-- UANG BULANAN -->
+  <div class="box">
+    <h3>Uang Bulanan</h3>
+    <h2>Rp <span id="uangBulanan">0</span></h2>
+    <input type="number" id="inputUang" placeholder="Masukkan uang bulanan (Rp)">
+    <button onclick="setUang()">Set</button>
+  </div>
+
+  <!-- TAMBAH PENGELUARAN -->
+  <h3>Tambah Pengeluaran</h3>
+  <input type="text" id="nama" placeholder="Nama pengeluaran">
+  <input type="number" id="nominal" placeholder="Nominal (Rp)">
+  <select id="kategori">
+    <option value="">Pilih Kategori</option>
+    <option>Makan</option>
+    <option>Transport</option>
+    <option>Kuliah</option>
+    <option>Lainnya</option>
+  </select>
+  <button onclick="tambah()">Tambah</button>
+
+  <!-- LIST -->
+  <div class="list" id="list">
+    Belum ada pengeluaran
+  </div>
+
+  <!-- RINGKASAN -->
+  <div class="summary">
+    <h3>Ringkasan Keuangan</h3>
+    <div>
+      <span>Uang Bulanan</span>
+      <span>Rp <span id="sUang">0</span></span>
+    </div>
+    <div>
+      <span>Total Pengeluaran</span>
+      <span>Rp <span id="total">0</span></span>
+    </div>
+    <hr>
+    <div>
+      <strong>Sisa Uang</strong>
+      <strong>Rp <span id="sisa">0</span></strong>
+    </div>
+  </div>
+
+  <button class="reset" onclick="reset()">Reset Semua Data</button>
+
+</div>
+
+<script>
+let uang = 0;
+let total = 0;
+let data = [];
+
+function setUang(){
+  uang = Number(inputUang.value);
+  uangBulanan.innerText = uang;
+  sUang.innerText = uang;
+  hitung();
+}
+
+function tambah(){
+  if(!nama.value || !nominal.value || !kategori.value) return;
+
+  data.push({
+    nama:nama.value,
+    nominal:Number(nominal.value),
+    kategori:kategori.value
+  });
+
+  total += Number(nominal.value);
+  tampil();
+  hitung();
+
+  nama.value='';
+  nominal.value='';
+  kategori.value='';
+}
+
+function tampil(){
+  list.innerHTML='';
+  data.forEach(d=>{
+    let p=document.createElement('p');
+    p.innerText=`${d.nama} - Rp ${d.nominal} (${d.kategori})`;
+    list.appendChild(p);
+  });
+}
+
+function hitung(){
+  totalEl.innerText = total;
+  sisa.innerText = uang - total;
+}
+
+function reset(){
+  uang=0; total=0; data=[];
+  uangBulanan.innerText=0;
+  sUang.innerText=0;
+  totalEl.innerText=0;
+  sisa.innerText=0;
+  list.innerHTML='Belum ada pengeluaran';
+}
+
+const totalEl = document.getElementById('total');
+</script>
+
+</body>
+</html>
